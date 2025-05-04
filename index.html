@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Reserve Asset: Decentralized digital wealth tokens based on real-world elements. Pay with Bitcoin, Ethereum, Solana, Pi, Stellar, XRP, USDT, USDC." />
+  <meta name="keywords" content="digital wealth, reserve asset, blockchain, cryptocurrency payments, ESG, gold, silver" />
+  <title>Reserve Asset</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --primary-gold: #d4af37;
+      --gold: #d4af37;
+      --silver: #c0c0c0;
+      --diamond: #b0c4de;
+      --ruby: #9b1d64;
+      --sapphire: #0f52ba;
+      --platinum: #778899;
+      --bg-light: #ffffff;
+      --bg-gradient: #fff9e6;
+      --text-dark: #333;
+      --text-muted: #555;
+    }
+    [data-theme="dark"] {
+      --bg-light: #1a1a1a;
+      --bg-gradient: #2c2c2c;
+      --text-dark: #e0e0e0;
+      --text-muted: #a0a0a0;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, var(--bg-light), var(--bg-gradient));
+      color: var(--text-dark);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(to bottom, var(--bg-light), #fff8dc);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-gold);
+      text-decoration: none;
+    }
+    header p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 0;
+      font-weight: 600;
+    }
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--primary-gold);
+      outline: none;
+    }
+    .button {
+      background-color: var(--primary-gold);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .button:hover {
+      background-color: #b89730;
+      transform: scale(1.05);
+    }
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-dark);
+    }
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background-color: var(--primary-gold);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+    .scroll-top:hover {
+      background-color: #b89730;
+    }
+    .crypto-payments {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .crypto-payments h2 {
+      color: var(--primary-gold);
+      margin-bottom: 1rem;
+    }
+    .crypto-payments select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-right: 1rem;
+    }
+    .crypto-payments .button {
+      margin-top: 1rem;
+    }
+    .crypto-payments p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+    .real-time-prices {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      text-align: center;
+    }
+    .price-card {
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    .price-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .price-card p {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+    .gold-price { border: 1px solid var(--gold); }
+    .silver-price { border: 1px solid var(--silver); }
+    .diamond-price { border: 1px solid var(--diamond); }
+    .ruby-price { border: 1px solid var(--ruby); }
+    .sapphire-price { border: 1px solid var(--sapphire); }
+    .platinum-price { border: 1px solid var(--platinum); }
+    .supply-chart {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: var(--bg-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+    .supply-chart canvas {
+      max-width: 100%;
+    }
+    .chart-description {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .card {
+      background-color: var(--bg-light);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+    .card h2 {
+      color: var(--text-dark);
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      display: inline-block;
+      color: #fff;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      margin-bottom: 0.75rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .gold .badge { background-color: var(--gold); }
+    .gold { border: 1px solid var(--gold); }
+    .silver .badge { background-color: var(--silver); }
+    .silver { border: 1px solid var(--silver); }
+    .diamond .badge { background-color: var(--diamond); }
+    .diamond { border: 1px solid var(--diamond); }
+    .ruby .badge { background-color: var(--ruby); }
+    .ruby { border: 1px solid var(--ruby); }
+    .sapphire .badge { background-color: var(--sapphire); }
+    .sapphire { border: 1px solid var(--sapphire); }
+    .platinum .badge { background-color: var(--platinum); }
+    .platinum { border: 1px solid var(--platinum); }
+    .faq {
+      max-width: 800px;
+      margin: 4rem auto;
+      padding: 0 1rem;
+    }
+    .faq h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--primary-gold);
+    }
+    .faq-item {
+      margin-bottom: 1.5rem;
+    }
+    .faq-item h3 {
+      font-size: 1.25rem;
+      color: var(--text-dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    .faq-item h3:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .faq-item h3::after {
+      content: '\25BC';
+      font-size: 0.875rem;
+    }
+    .faq-item.active h3::after {
+      content: '\25B2';
+    }
+    .faq-item p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      display: none;
+      padding: 0.5rem;
+    }
+    .faq-item.active p {
+      display: block;
+    }
+    footer {
+      background: linear-gradient(to top, #fff8dc, var(--bg-light));
+      padding: 3rem 1rem;
+      color: var(--text-dark);
+      border-top: 1px solid #eee;
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+    .footer-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      color: var(--primary-gold);
+    }
+    .footer-content a {
+      color: var(--text-dark);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    .footer-content a:hover, .footer-content a:focus {
+      color: var(--primary-gold);
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-links a {
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      transition: color 0.3s ease;
+    }
+    .social-links a:hover, .social-links a:focus {
+      color: var(--primary-gold);
+    }
+    .newsletter form {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .newsletter input {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      flex: 1;
+    }
+    .newsletter button {
+      background-color: var(--primary-gold);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .newsletter button:hover {
+      background-color: #b89730;
+    }
+    .disclaimer {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      max-width: 800px;
+      margin: 1rem auto;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      nav, .footer-content, .newsletter form, .real-time-prices, .crypto-payments {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .footer-content, .real-time-prices, .crypto-payments {
+        text-align: center;
+      }
+      .crypto-payments select {
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .supply-chart {
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="theme-toggle" aria-label="Toggle dark mode"><i class="fas fa-moon"></i></button>
+  <button class="scroll-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+  <header>
+    <div class="header-content">
+      <a href="/" class="logo">Reserve Asset</a>
+      <p>Redefining Digital Wealth Through Scarcity and Elemental Rarity</p>
+      <a href="whitepaper.pdf" class="button">Read Whitepaper</a>
+      <nav aria-label="Main navigation">
+        <a href="#payments">Pay with Crypto</a>
+        <a href="#prices">Prices</a>
+        <a href="#assets">Assets</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="crypto-payments" id="payments">
+    <h2>Pay with Cryptocurrency</h2>
+    <p>Support payments with Bitcoin, Ethereum, Solana, Pi, Stellar, XRP, USDT, and USDC across multiple blockchains.</p>
+    <select id="crypto-select" aria-label="Select cryptocurrency">
+      <option value="BTC">Bitcoin (BTC) - Bitcoin</option>
+      <option value="ETH">Ethereum (ETH) - Ethereum</option>
+      <option value="SOL">Solana (SOL) - Solana</option>
+      <option value="PI">Pi (PI) - Pi Network</option>
+      <option value="XLM">Stellar (XLM) - Stellar</option>
+      <option value="XRP">XRP - XRP Ledger</option>
+      <option value="USDT-ETH">USDT - Ethereum (ERC-20)</option>
+      <option value="USDT-SOL">USDT - Solana</option>
+      <option value="USDT-TRON">USDT - TRON</option>
+      <option value="USDC-ETH">USDC - Ethereum (ERC-20)</option>
+      <option value="USDC-SOL">USDC - Solana</option>
+      <option value="USDC-STELLAR">USDC - Stellar</option>
+    </select>
+    <button class="button" id="pay-now">Pay Now</button>
+    <p>Powered by <a href="https://nowpayments.io" target="_blank">NOWPayments</a>. Ensure your wallet supports the selected blockchain.</p>
+  </section>
+
+  <section class="real-time-prices" id="prices">
+    <h2 style="text-align: center; color: var(--primary-gold); grid-column: 1 / -1;">Real-Time Prices</h2>
+    <div class="price-card gold-price">
+      <h3>Gold (XAU/USD)</h3>
+      <p id="gold-price">Price: Loading...</p>
+      <p id="gold-timestamp">Timestamp: Loading...</p>
+      <p>Source: <a href="https://metals-api.com" target="_blank">Metals-API</a></p>
+    </div>
+    <div class="price-card silver-price">
+      <h3>Silver (XAG/USD)</h3>
+      <p id="silver-price">Price: Loading...</p>
+      <p id="silver-timestamp">Timestamp: Loading...</p>
+      <p>Source: <a href="https://metals-api.com" target="_blank">Metals-API</a></p>
+    </div>
+    <div class="price-card diamond-price">
+      <h3>Diamond (C)</h3>
+      <p id="diamond-price">Price: $1.00 (Speculative)</p>
+      <p id="diamond-timestamp">Timestamp: N/A</p>
+      <p>Note: No real-time data available</p>
+    </div>
+    <div class="price-card ruby-price">
+      <h3>Ruby (Al₂O₃ + Cr)</h3>
+      <p id="ruby-price">Price: $1.00 (Speculative)</p>
+      <p id="ruby-timestamp">Timestamp: N/A</p>
+      <p>Note: No real-time data available</p>
+    </div>
+    <div class="price-card sapphire-price">
+      <h3>Sapphire (Al₂O₃ + Fe, Ti)</h3>
+      <p id="sapphire-price">Price: $1.00 (Speculative)</p>
+      <p id="sapphire-timestamp">Timestamp: N/A</p>
+      <p>Note: No real-time data available</p>
+    </div>
+    <div class="price-card platinum-price">
+      <h3>Platinum (Pt)</h3>
+      <p id="platinum-price">Price: $1.00 (Speculative)</p>
+      <p id="platinum-timestamp">Timestamp: N/A</p>
+      <p>Note: No real-time data available</p>
+    </div>
+  </section>
+
+  <section class="supply-chart" id="supply">
+    <h2 style="text-align: center; color: var(--primary-gold);">Asset Supply Distribution</h2>
+    <canvas id="supplyChart" aria-label="Pie chart showing supply distribution of Reserve Assets"></canvas>
+    <p class="chart-description" id="chart-description">
+      This chart illustrates the supply distribution of Reserve Assets: Gold (1,000,000 tokens), Silver (750,000 tokens), Diamond (500,000 tokens), Ruby (250,000 tokens), Sapphire (250,000 tokens), Platinum (100,000 tokens).
+    </p>
+  </section>
+
+  <section class="grid" id="assets">
+    <div class="card gold">
+      <span class="badge">Element: Au (Gold)</span>
+      <h2>Gold</h2>
+      <p>Supply: 1,000,000</p>
+      <p id="gold-current-price">Current Price: Loading...</p>
+      <p>Growth: +6% / year</p>
+      <p id="gold-future-price">Est. Price (2030): Loading...</p>
+    </div>
+    <div class="card silver">
+      <span class="badge">Element: Ag (Silver)</span>
+      <h2>Silver</h2>
+      <p>Supply: 750,000</p>
+      <p id="silver-current-price">Current Price: Loading...</p>
+      <p>Growth: +6.5% / year</p>
+      <p id="silver-future-price">Est. Price (2030): Loading...</p>
+    </div>
+    <div class="card diamond">
+      <span class="badge">Element: C (Carbon)</span>
+      <h2>Diamond</h2>
+      <p>Supply: 500,000</p>
+      <p id="diamond-current-price">Current Price: $1.00 (Speculative)</p>
+      <p>Growth: +7.5% / year</p>
+      <p id="diamond-future-price">Est. Price (2030): $1.44</p>
+    </div>
+    <div class="card ruby">
+      <span class="badge">Element: Al₂O₃ + Cr (Ruby)</span>
+      <h2>Ruby</h2>
+      <p>Supply: 250,000</p>
+      <p id="ruby-current-price">Current Price: $1.00 (Speculative)</p>
+      <p>Growth: +8% / year</p>
+      <p id="ruby-future-price">Est. Price (2030): $1.47</p>
+    </div>
+    <div class="card sapphire">
+      <span class="badge">Element: Al₂O₃ + Fe, Ti (Sapphire)</span>
+      <h2>Sapphire</h2>
+      <p>Supply: 250,000</p>
+      <p id="sapphire-current-price">Current Price: $1.00 (Speculative)</p>
+      <p>Growth: +8% / year</p>
+      <p id="sapphire-future-price">Est. Price (2030): $1.47</p>
+    </div>
+    <div class="card platinum">
+      <span class="badge">Element: Pt (Platinum)</span>
+      <h2>Platinum</h2>
+      <p>Supply: 100,000</p>
+      <p id="platinum-current-price">Current Price: $1.00 (Speculative)</p>
+      <p>Growth: +10% / year</p>
+      <p id="platinum-future-price">Est. Price (2030): $1.61</p>
+    </div>
+  </section>
+  <p class="disclaimer">*Current prices for Gold and Silver are sourced from Metals-API. Other prices are speculative. Estimated 2030 prices are based on compound growth and are not guaranteed.</p>
+
+  <section class="faq" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item" id="faq1">
+      <h3 aria-expanded="false" aria-controls="faq1-content">What is Reserve Asset?</h3>
+      <p id="faq1-content">Reserve Asset is a decentralized digital wealth token system based on real-world elements and rare minerals, combining limited supply with scientifically verified scarcity.</p>
+    </div>
+    <div class="faq-item" id="faq2">
+      <h3 aria-expanded="false" aria-controls="faq2-content">How can I pay with cryptocurrencies?</h3>
+      <p id="faq2-content">Select your preferred cryptocurrency (e.g., Bitcoin, Ethereum, Solana, Pi, Stellar, XRP, USDT, USDC) and blockchain in the payment section. Follow the instructions to send funds via your wallet to the provided address.</p>
+    </div>
+    <div class="faq-item" id="faq3">
+      <h3 aria-expanded="false" aria-controls="faq3-content">Which blockchains are supported for payments?</h3>
+      <p id="faq3-content">We support payments on Bitcoin, Ethereum, Solana, Pi Network, Stellar, XRP Ledger, and TRON, depending on the cryptocurrency chosen (e.g., USDT on Ethereum, Solana, or TRON).</p>
+    </div>
+    <div class="faq-item" id="faq4">
+      <h3 aria-expanded="false" aria-controls="faq4-content">Is the supply limited?</h3>
+      <p id="faq4-content">Absolutely. Each Reserve Asset is assigned a fixed maximum supply, creating true scarcity inspired by physical constraints of Earth's periodic elements.</p>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="footer-content">
+      <div>
+        <h3>About Reserve Asset</h3>
+        <p>Empowering digital wealth through scarcity and elemental rarity.</p>
+        <div class="social-links">
+          <a href="https://twitter.com/reserveasset" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://discord.gg/reserveasset" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          <a href="https://t.me/reserveasset" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+      <div>
+        <h3>Data & Research</h3>
+        <a href="#prices">Asset Price Data</a>
+        <a href="#supply">Supply Distribution</a>
+        <a href="/whitepaper.pdf">Research Whitepaper</a>
+        <a href="/insights">Market Insights</a>
+      </div>
+      <div>
+        <h3>Tools & Events</h3>
+        <a href="#payments">Crypto Payment Tools</a>
+        <a href="/portfolio-simulator">Portfolio Simulator</a>
+        <a href="/events">Webinars & Events</a>
+      </div>
+      <div>
+        <h3>ESG & Values</h3>
+        <a href="/esg">Responsible Sourcing</a>
+        <a href="/values">Our Values</a>
+        <a href="/gender-equality">Women's Empowerment</a>
+        <a href="/human-rights">Human Rights Statement</a>
+        <a href="/modern-slavery">Modern Slavery Statement</a>
+        <a href="/suppliers">Expectations of Suppliers</a>
+      </div>
+      <div>
+        <h3>Policies</h3>
+        <a href="/accessibility">Accessibility</a>
+        <a href="/covid-19">COVID-19 Statement</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms & Conditions</a>
+        <a href="/cookies">Cookies Policy</a>
+        <a href="/manage-cookies">Manage Cookies</a>
+      </div>
+      <div class="newsletter">
+        <h3>Newsletter</h3>
+        <form>
+          <input type="email" placeholder="Subscribe to our newsletter" aria-label="Email for newsletter" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <p class="disclaimer">© <script>document.write(new Date().getFullYear())</script> Reserve Asset. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Placeholder price data (replace with live API call)
+    const priceData = {
+      gold: { price: 2666.67, timestamp: '2025-05-05T02:04:00Z', speculative: false },
+      silver: { price: 31.00, timestamp: '2025-05-05T02:04:00Z', speculative: false },
+      diamond: { price: 1.00, timestamp: 'N/A', speculative: true },
+      ruby: { price: 1.00, timestamp: 'N/A', speculative: true },
+      sapphire: { price: 1.00, timestamp: 'N/A', speculative: true },
+      platinum: { price: 1.00, timestamp: 'N/A', speculative: true }
+    };
+
+    // Update real-time prices and asset cards
+    function updatePrices() {
+      const assets = ['gold', 'silver', 'diamond', 'ruby', 'sapphire', 'platinum'];
+      assets.forEach(asset => {
+        const price = priceData[asset].price;
+        const timestamp = priceData[asset].timestamp;
+        const isSpeculative = priceData[asset].speculative;
+        document.getElementById(`${asset}-price`).textContent = `Price: $${price.toFixed(2)}${isSpeculative ? ' (Speculative)' : ''}`;
+        document.getElementById(`${asset}-timestamp`).textContent = `Timestamp: ${timestamp === 'N/A' ? 'N/A' : new Date(timestamp).toLocaleString()}`;
+        document.getElementById(`${asset}-current-price`).textContent = `Current Price: $${price.toFixed(2)}${isSpeculative ? ' (Speculative)' : ''}`;
+        if (!isSpeculative) {
+          const growthRate = asset === 'gold' ? 0.06 : asset === 'silver' ? 0.065 : asset === 'diamond' ? 0.075 : asset === 'ruby' || asset === 'sapphire' ? 0.08 : 0.10;
+          document.getElementById(`${asset}-future-price`).textContent = `Est. Price (2030): $${(price * Math.pow(1 + growthRate, 5)).toFixed(2)}`;
+        }
+      });
+      localStorage.setItem('priceData', JSON.stringify(priceData));
+    }
+
+    // Load cached prices if available
+    if (localStorage.getItem('priceData')) {
+      const cached = JSON.parse(localStorage.getItem('priceData'));
+      if (cached.gold && cached.silver) {
+        Object.assign(priceData, cached);
+        updatePrices();
+      }
+    }
+
+    // Live price fetch (uncomment with your API key)
+    /*
+    async function fetchPrices() {
+      try {
+        const response = await fetch('https://api.metals-api.com/v1/latest?access_key=YOUR_API_KEY&base=USD&symbols=XAU,XAG');
+        const data = await response.json();
+        if (data.success) {
+          priceData.gold = { price: 1 / data.rates.XAU, timestamp: new Date(data.timestamp * 1000).toISOString(), speculative: false };
+          priceData.silver = { price: 1 / data.rates.XAG, timestamp: new Date(data.timestamp * 1000).toISOString(), speculative: false };
+          updatePrices();
+        } else {
+          console.error('API error:', data.error);
+          document.getElementById('gold-price').textContent = 'Price: Error';
+          document.getElementById('silver-price').textContent = 'Price: Error';
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        document.getElementById('gold-price').textContent = 'Price: Error';
+        document.getElementById('silver-price').textContent = 'Price: Error';
+      }
+    }
+    fetchPrices();
+    setInterval(fetchPrices, 3600000); // Update hourly
+    */
+
+    // Initialize with placeholder data
+    updatePrices();
+
+    // Payment handling
+    document.getElementById('pay-now').addEventListener('click', () => {
+      const crypto = document.getElementById('crypto-select').value;
+      alert(`Initiating payment with ${crypto}. Please integrate NOWPayments API for live checkout.`);
+    });
+
+    // Pie Chart for Asset Supply Distribution
+    try {
+      const ctx = document.getElementById('supplyChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Gold', 'Silver', 'Diamond', 'Ruby', 'Sapphire', 'Platinum'],
+          datasets: [{
+            data: [1000000, 750000, 500000, 250000, 250000, 100000],
+            backgroundColor: ['#d4af37', '#c0c0c0', '#b0c4de', '#9b1d64', '#0f52ba', '#778899'],
+            borderColor: ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          animation: {
+            animateScale: true,
+            animateRotate: true
+          },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: 'var(--text-dark)',
+                font: { size: 14 }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: (context) => `${context.label}: ${context.raw.toLocaleString()} tokens`
+              }
+            }
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Chart.js error:', error);
+      document.getElementById('chart-description').textContent = 'Error loading chart. Supply distribution: Gold (1,000,000 tokens), Silver (750,000 tokens), Diamond (500,000 tokens), Ruby (250,000 tokens), Sapphire (250,000 tokens), Platinum (100,000 tokens).';
+    }
+
+    // Collapsible FAQ
+    document.querySelectorAll('.faq-item h3').forEach(item => {
+      item.addEventListener('click', () => {
+        const faqItem = item.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(f => {
+          f.classList.remove('active');
+          f.querySelector('h3').setAttribute('aria-expanded', 'false');
+        });
+        if (!isActive) {
+          faqItem.classList.add('active');
+          item.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Dark Mode Toggle
+    document.querySelector('.theme-toggle').addEventListener('click', () => {
+      document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.querySelector('.theme-toggle i').classList.toggle('fa-moon');
+      document.querySelector('.theme-toggle i').classList.toggle('fa-sun');
+    });
+
+    // Scroll-to-Top
+    const scrollTopBtn = document.querySelector('.scroll-top');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
