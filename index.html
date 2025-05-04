@@ -383,15 +383,15 @@
   <button class="scroll-top" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
   <header>
     <div class="header-content">
-      <a href="/" class="logo">Reserve Asset</a>
+      <a href="index.html" class="logo">Reserve Asset</a>
       <p>Redefining Digital Wealth Through Scarcity and Elemental Rarity</p>
       <a href="whitepaper.html" class="button">Read Whitepaper</a>
       <nav aria-label="Main navigation">
-        <a href="#payments">Pay with Crypto</a>
-        <a href="#prices">Prices</a>
-        <a href="#assets">Assets</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
+        <a href="payments.html">Pay with Crypto</a>
+        <a href="prices.html">Prices</a>
+        <a href="assets.html">Assets</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
       </nav>
     </div>
   </header>
@@ -550,34 +550,34 @@
       </div>
       <div>
         <h3>Data & Research</h3>
-        <a href="#prices">Asset Price Data</a>
-        <a href="#supply">Supply Distribution</a>
-        <a href="/whitepaper.pdf">Research Whitepaper</a>
-        <a href="/insights">Market Insights</a>
+        <a href="prices.html">Asset Price Data</a>
+        <a href="assets.html">Supply Distribution</a>
+        <a href="whitepaper.html">Research Whitepaper</a>
+        <a href="insights.html">Market Insights</a>
       </div>
       <div>
         <h3>Tools & Events</h3>
-        <a href="#payments">Crypto Payment Tools</a>
-        <a href="/portfolio-simulator">Portfolio Simulator</a>
-        <a href="/events">Webinars & Events</a>
+        <a href="payments.html">Crypto Payment Tools</a>
+        <a href="portfolio-simulator.html">Portfolio Simulator</a>
+        <a href="events.html">Webinars & Events</a>
       </div>
       <div>
         <h3>ESG & Values</h3>
-        <a href="/esg">Responsible Sourcing</a>
-        <a href="/values">Our Values</a>
-        <a href="/gender-equality">Women's Empowerment</a>
-        <a href="/human-rights">Human Rights Statement</a>
-        <a href="/modern-slavery">Modern Slavery Statement</a>
-        <a href="/suppliers">Expectations of Suppliers</a>
+        <a href="esg.html">Responsible Sourcing</a>
+        <a href="values.html">Our Values</a>
+        <a href="gender-equality.html">Women's Empowerment</a>
+        <a href="human-rights.html">Human Rights Statement</a>
+        <a href="modern-slavery.html">Modern Slavery Statement</a>
+        <a href="suppliers.html">Expectations of Suppliers</a>
       </div>
       <div>
         <h3>Policies</h3>
-        <a href="/accessibility">Accessibility</a>
-        <a href="/covid-19">COVID-19 Statement</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms & Conditions</a>
-        <a href="/cookies">Cookies Policy</a>
-        <a href="/manage-cookies">Manage Cookies</a>
+        <a href="accessibility.html">Accessibility</a>
+        <a href="covid-19.html">COVID-19 Statement</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="cookies.html">Cookies Policy</a>
+        <a href="manage-cookies.html">Manage Cookies</a>
       </div>
       <div class="newsletter">
         <h3>Newsletter</h3>
@@ -591,7 +591,7 @@
   </footer>
 
   <script>
-    // Placeholder price data (replace with live API call)
+    // Placeholder price data
     const priceData = {
       gold: { price: 2666.67, timestamp: '2025-05-05T02:04:00Z', speculative: false },
       silver: { price: 31.00, timestamp: '2025-05-05T02:04:00Z', speculative: false },
@@ -601,7 +601,7 @@
       platinum: { price: 1.00, timestamp: 'N/A', speculative: true }
     };
 
-    // Update real-time prices and asset cards
+    // Update prices and asset cards
     function updatePrices() {
       const assets = ['gold', 'silver', 'diamond', 'ruby', 'sapphire', 'platinum'];
       assets.forEach(asset => {
@@ -619,7 +619,7 @@
       localStorage.setItem('priceData', JSON.stringify(priceData));
     }
 
-    // Load cached prices if available
+    // Load cached prices
     if (localStorage.getItem('priceData')) {
       const cached = JSON.parse(localStorage.getItem('priceData'));
       if (cached.gold && cached.silver) {
@@ -628,7 +628,7 @@
       }
     }
 
-    // Live price fetch (uncomment with your API key)
+    // Live price fetch (uncomment with API key)
     /*
     async function fetchPrices() {
       try {
@@ -650,10 +650,10 @@
       }
     }
     fetchPrices();
-    setInterval(fetchPrices, 3600000); // Update hourly
+    setInterval(fetchPrices, 3600000);
     */
 
-    // Initialize with placeholder data
+    // Initialize prices
     updatePrices();
 
     // Payment handling
@@ -662,7 +662,7 @@
       alert(`Initiating payment with ${crypto}. Please integrate NOWPayments API for live checkout.`);
     });
 
-    // Pie Chart for Asset Supply Distribution
+    // Pie Chart
     try {
       const ctx = document.getElementById('supplyChart').getContext('2d');
       new Chart(ctx, {
@@ -679,23 +679,10 @@
         options: {
           responsive: true,
           maintainAspectRatio: true,
-          animation: {
-            animateScale: true,
-            animateRotate: true
-          },
+          animation: { animateScale: true, animateRotate: true },
           plugins: {
-            legend: {
-              position: 'bottom',
-              labels: {
-                color: 'var(--text-dark)',
-                font: { size: 14 }
-              }
-            },
-            tooltip: {
-              callbacks: {
-                label: (context) => `${context.label}: ${context.raw.toLocaleString()} tokens`
-              }
-            }
+            legend: { position: 'bottom', labels: { color: 'var(--text-dark)', font: { size: 14 } } },
+            tooltip: { callbacks: { label: (context) => `${context.label}: ${context.raw.toLocaleString()} tokens` } }
           }
         }
       });
