@@ -1,0 +1,31 @@
+reserve-asset/
+├── public/
+│   ├── index.html
+│   ├── assets.html
+│   ├── prices.html
+│   ├── payments.html
+│   ├── faq.html
+│   ├── whitepaper.html
+│   ├── contact.html
+│   ├── css/
+│   │   └── styles.css
+│   ├── js/
+│   │   ├── web3.min.js
+│   │   ├── ethers.js
+│   │   ├── chart.js
+│   │   └── main.js
+├── server/
+│   ├── index.js (Node.js for NOWPayments)
+│   ├── package.json
+├── contracts/
+│   ├── RAUGold.sol
+│   ├── RAGSilver.sol
+│   ├── RDIDiamond.sol
+│   ├── RRURuby.sol
+│   ├── RSASapphire.sol
+│   ├── RPTPlatinum.sol
+│   ├── RATController.sol
+├── scripts/
+│   └── deploy.js
+├── hardhat.config.js
+├── package.json
