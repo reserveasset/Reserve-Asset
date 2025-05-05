@@ -1,5 +1,15 @@
 # Reserve Asset Token (RAT)
+
+![NOWPayments Trusted](https://img.shields.io/badge/NOWPayments-Trusted-blueviolet?style=for-the-badge&logo=bitcoin)
 ![Trusted in All Chains](https://img.shields.io/badge/Trusted-in%20All%20Chains-blueviolet?style=for-the-badge&logo=ethereum)
+![Ethereum](https://img.shields.io/badge/Trusted_on-Ethereum-blue?logo=ethereum)
+![BNB Chain](https://img.shields.io/badge/Trusted_on-BNB%20Chain-yellow?logo=binance)
+![Polygon](https://img.shields.io/badge/Trusted_on-Polygon-purple?logo=polygon)
+![Bitcoin](https://img.shields.io/badge/Trusted_on-Bitcoin-orange?logo=bitcoin)
+![Solana](https://img.shields.io/badge/Trusted_on-Solana-black?logo=solana)
+![TRON](https://img.shields.io/badge/Trusted_on-TRON-red?logo=tron)
+![Trusted in All Chains](https://img.shields.io/badge/Trusted-in%20All%20Chains-brightgreen?logo=blockchaindotcom)
+
 
 **Reserve Asset Token (RAT)** is a decentralized digital wealth system backed by real-world assets:  
 - 🟡 Gold (RAU)  
