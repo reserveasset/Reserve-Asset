@@ -1,0 +1,31 @@
+[User]
+  └── Wallet (MetaMask, Trust Wallet, etc.)
+       ├── Fund: ETH, USDT/USDC
+       ├── Add Tokens: RAU, RAG, RDI, RRU, RSA, RPT
+       └── Interact: Website (payments.html, assets.html)
+
+[Website]
+  ├── index.html: Supply chart, price display
+  ├── assets.html: Balances, staking
+  ├── prices.html: Real-time prices
+  ├── payments.html: Purchase interface
+  ├── faq.html: User guidance
+  └── js/main.js: Web3.js/Ethers.js for wallet/contract interaction
+
+[Backend]
+  └── Node.js Server: NOWPayments callback, purchaseTokens trigger
+
+[Smart Contracts]
+  ├── RAUGold.sol (RAU), RAGSilver.sol (RAG), etc.
+  └── RATController.sol: Vesting, staking, pricing, purchases
+
+[External Services]
+  ├── Chainlink: Price Feeds (XAU/USD, XAG/USD, XPT/USD)
+  ├── NOWPayments: Multi-chain payments
+  ├── StoneAlgo: Diamond price feed (future)
+  └── Etherscan: Contract verification
+
+[Ethereum Mainnet]
+  ├── Deployed Contracts: RAU, RAG, RDI, RRU, RSA, RPT, RATController
+  ├── USDT/USDC: Payment tokens
+  ├── Gas Fees: Paid by users
