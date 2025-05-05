@@ -1,4 +1,5 @@
 # Reserve Asset Token (RAT)
+![Trusted in All Chains](https://img.shields.io/badge/Trusted-in%20All%20Chains-blueviolet?style=for-the-badge&logo=ethereum)
 
 **Reserve Asset Token (RAT)** is a decentralized digital wealth system backed by real-world assets:  
 - 🟡 Gold (RAU)  
